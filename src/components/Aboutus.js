@@ -1,40 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react';
 
-export default function Aboutus() {
-
-  const[myStyle, setmyStyle] = useState({
-        color: 'black',
-        backgroundColor: 'white'
+export default function Aboutus(props) {
+  const [myStyle, setMyStyle] = useState({
+    color: props.mode === 'light' ? 'black' : 'white',
+    backgroundColor: props.mode === 'light' ? 'white' : '#212529',
   });
 
-  const [btntext, setbtntext] = useState("Enable Dark Mode")
-  const [mybtn, setmybtn] = useState('info')
 
-  const toggleStyle = ()=>{
-    if(myStyle.color === 'white'){
-      setmyStyle({
+  useEffect(() => {
+    if (props.mode === 'light') {
+      setMyStyle({
         color: 'black',
-        backgroundColor: 'white'
-      })
-      setbtntext("Enable Dark Mode");
-      setmybtn("info");
-    }else{
-      setmyStyle({
+        backgroundColor: 'white',
+      });
+    } else {
+      setMyStyle({
         color: 'white',
-        backgroundColor: 'black'
-      })
-      setbtntext("Enable Light Mode");
-      setmybtn("success");
+        backgroundColor: '#212529',
+      });
     }
-  }
-  
-  
-  
-
-
+  }, [props.mode]);
   return (
     <div className="container" style = {myStyle}>
-      <hr/>
       <h1>About us</h1>
       <div className="accordion" id="accordionExample">
         <div className="accordion-item">
@@ -131,9 +118,9 @@ export default function Aboutus() {
           </div>
         </div>
       </div>
-      <div className="container">
+      {/* <div className="container">
         <button onClick={toggleStyle} type="button" className={`btn btn-${mybtn}`}>{btntext}</button>
-      </div>
+      </div> */}
     </div>
   );
 }
